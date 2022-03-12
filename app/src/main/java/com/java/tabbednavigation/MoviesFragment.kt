@@ -1,0 +1,43 @@
+package com.java.tabbednavigation
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+class MoviesFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val root  =  inflater.inflate(R.layout.fragment_movies, container, false)
+
+         root.findViewById<TextView>(R.id.movie_genre).text =
+             arguments?.getString(MOVIE_GENRE)?:"Undefined Genre"
+        return root
+    }
+
+    companion object {
+        private const val MOVIE_GENRE = "MOVIE_TYPE"
+        @JvmStatic
+        fun newInstance(movieGenre: String) =
+            MoviesFragment().apply {
+
+                arguments = Bundle().apply {
+                    putString(MOVIE_GENRE, movieGenre)
+                }
+            }
+    }
+}
